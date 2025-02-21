@@ -3,50 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>André ❤️ Sophie</title>
+    <title>André ❤️ Sophie - Liebes-Countdown</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #fff0f5;
-            color: #333;
-            padding: 50px;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #fff;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
         h1 {
             font-size: 2.5em;
-            color: red;
+            font-weight: 600;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         }
-        #countdown {
-            font-size: 2em;
+
+        .countdown {
+            font-size: 1.8em;
+            font-weight: bold;
             margin: 20px 0;
         }
-        #duration {
-            font-size: 1.5em;
+
+        .heart {
+            font-size: 3em;
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .since {
+            font-size: 1.2em;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <h1>André ❤️ Sophie</h1>
-    <div id="countdown"></div>
-    <div id="duration"></div>
+
+    <div class="container">
+        <h1>André ❤️ Sophie</h1>
+        <div class="heart">💖</div>
+        <div class="countdown" id="countdown"></div>
+        <p class="since" id="since"></p>
+    </div>
 
     <script>
         function updateCountdown() {
             const startDate = new Date("2022-01-27T00:00:00");
             const now = new Date();
             let diff = now - startDate;
-            
+
             let seconds = Math.floor(diff / 1000) % 60;
             let minutes = Math.floor(diff / (1000 * 60)) % 60;
             let hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
             let days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-            document.getElementById("countdown").innerText = `${days} Tage, ${hours} Stunden, ${minutes} Minuten, ${seconds} Sekunden`;
-            document.getElementById("duration").innerText = `André und Sophie sind seit ${days} Tagen ein glückliches Paar!`;
+            document.getElementById("countdown").innerText = `${days} Tage, ${hours} Std, ${minutes} Min, ${seconds} Sek`;
+            document.getElementById("since").innerText = `Seit dem 27. Januar 2022 ❤️`;
+            
+            requestAnimationFrame(updateCountdown);
         }
 
         updateCountdown();
-        setInterval(updateCountdown, 1000);
     </script>
+
 </body>
 </html>
+
