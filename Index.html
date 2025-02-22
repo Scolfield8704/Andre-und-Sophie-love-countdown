@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Liebes Countdown</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <h1 style="text-align: center;">Liebes Countdown</h1>
+    <div style="text-align: center;">
+      <p id="countdown"></p>
+    </div>
+
+    <script>
+      function updateCountdown() {
+        const startDate = new Date("2022-01-27T00:00:00");
+        const now = new Date();
+        const diff = now - startDate;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("countdown").innerHTML = `${days} Tage ${hours} Std ${minutes} Min ${seconds} Sek`;
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
+
+    <a-scene>
+      <!-- Licht -->
+      <a-light type="point" position="2 4 4" intensity="1.5"></a-light>
+
+      <!-- Herz -->
+      <a-entity position="0 1.5 -3" rotation="0 180 0">
+        <a-obj-model src="heart.obj" material="color: pink;"></a-obj-model>
+      </a-entity>
+
+      <!-- Schlüssel -->
+      <a-entity position="-1 1.5 -3">
+        <a-obj-model src="key.obj" material="color: gold;"></a-obj-model>
+      </a-entity>
+
+      <!-- Charaktere -->
+      <a-entity position="-1 0 -3">
+        <a-obj-model src="characters.obj" material="color: red;"></a-obj-model>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
